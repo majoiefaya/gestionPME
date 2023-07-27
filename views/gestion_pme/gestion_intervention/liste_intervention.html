@@ -1,0 +1,30 @@
+{{extend 'base.html'}} 
+    {{ block contenu }}
+    <a href="{{=URL('gestion_intervention','create_intervention')}}"><button type="button" class="btn btn-primary">Ajout</button></a>
+    <table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>Description</th>
+        <th>Date Debut</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{for row in interventions:}}
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <p class="fw-normal mb-1">{{=row.description}}</p>
+          </div>
+        </td>
+        <td>
+            <p class="text-muted mb-0">{{=row.date_debut}}</p>
+        </td>
+        <td>
+            <a href="{{=URL('gestion_intervention','edit_intervention',args=row.id)}}"><button type="button" class="btn btn-success">Modifier</button></a>
+            <a href="{{=URL('gestion_intervention','delete_intervention',vars={'id': row.id})}}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+        </td>
+      </tr>
+      {{pass}}
+    </tbody>
+  </table>
+  {{ end }}

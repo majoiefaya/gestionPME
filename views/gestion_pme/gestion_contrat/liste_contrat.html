@@ -1,0 +1,35 @@
+{{extend 'base.html'}} 
+    {{ block contenu }}
+    <a href="{{=URL('gestion_contrat','create_contrat')}}"><button type="button" class="btn btn-primary">Ajout</button></a>
+    <table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>Description</th>
+        <th>Date  Debut</th>
+        <th>Qualification</th>
+        <th>Nombre Employe</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{for row in contrats:}}
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+             
+            </div>
+          </div>
+        </td>
+        <td>{{=row.description}}</td>
+        <td>{{=row.date_debut}}</td>
+        <td>{{=row.qualification}}</td>
+        <td>{{=row.nombre_employe}}</td>
+        <td>
+            <a href="{{=URL('gestion_contrat','edit_contrat',args=row.id)}}"><button type="button" class="btn btn-success">Modifier</button></a>
+            <a href="{{=URL('gestion_contrat','delete_contrat',vars={'id': row.id})}}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+        </td>
+      </tr>
+      {{pass}}
+    </tbody>
+  </table>
+  {{ end }}

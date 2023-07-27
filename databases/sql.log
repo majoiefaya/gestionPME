@@ -1,0 +1,131 @@
+timestamp: 2023-07-27T15:02:54.773713
+CREATE TABLE "auth_user"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "first_name" CHAR(128),
+    "last_name" CHAR(128),
+    "email" CHAR(512),
+    "password" CHAR(512),
+    "registration_key" CHAR(512),
+    "reset_password_key" CHAR(512),
+    "registration_id" CHAR(512)
+);
+success!
+timestamp: 2023-07-27T15:02:54.797515
+CREATE TABLE "auth_group"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "role" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2023-07-27T15:02:54.804619
+CREATE TABLE "auth_membership"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
+);
+success!
+timestamp: 2023-07-27T15:02:54.812003
+CREATE TABLE "auth_permission"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "name" CHAR(512),
+    "table_name" CHAR(512),
+    "record_id" INTEGER
+);
+success!
+timestamp: 2023-07-27T15:02:54.820517
+CREATE TABLE "auth_event"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "time_stamp" TIMESTAMP,
+    "client_ip" CHAR(512),
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "origin" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2023-07-27T15:02:54.827750
+CREATE TABLE "auth_cas"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "created_on" TIMESTAMP,
+    "service" CHAR(512),
+    "ticket" CHAR(512),
+    "renew" CHAR(1)
+);
+success!
+timestamp: 2023-07-27T15:02:54.835518
+CREATE TABLE "client"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "nom" CHAR(512),
+    "prenom" CHAR(512),
+    "email" CHAR(512),
+    "telephone" CHAR(512)
+);
+success!
+timestamp: 2023-07-27T15:02:54.845241
+CREATE TABLE "employe"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "nom" CHAR(512),
+    "prenom" CHAR(512),
+    "email" CHAR(512),
+    "telephone" CHAR(512),
+    "qualification" CHAR(512)
+);
+success!
+timestamp: 2023-07-27T15:02:54.852517
+CREATE TABLE "contrat"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "description" TEXT,
+    "date_debut" DATE,
+    "qualification" CHAR(512),
+    "nombre_employe" INTEGER,
+    "client_id" INTEGER REFERENCES "client" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "employe_id" INTEGER REFERENCES "employe" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
+);
+success!
+timestamp: 2023-07-27T15:02:54.860519
+CREATE TABLE "intervention"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "description" TEXT,
+    "date_debut" DATE,
+    "contrat_id" INTEGER REFERENCES "contrat" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
+);
+success!
+timestamp: 2023-07-27T15:08:21.013983
+CREATE TABLE "client"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "nom" CHAR(512),
+    "prenom" CHAR(512),
+    "email" CHAR(512),
+    "telephone" CHAR(512)
+);
+success!
+timestamp: 2023-07-27T15:08:21.021268
+CREATE TABLE "employe"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "nom" CHAR(512),
+    "prenom" CHAR(512),
+    "email" CHAR(512),
+    "telephone" CHAR(512),
+    "qualification" CHAR(512)
+);
+success!
+timestamp: 2023-07-27T15:08:21.026971
+CREATE TABLE "contrat"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "description" TEXT,
+    "date_debut" DATE,
+    "qualification" CHAR(512),
+    "nombre_employe" INTEGER,
+    "client_id" INTEGER REFERENCES "client" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "employe_id" INTEGER REFERENCES "employe" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
+);
+success!
+timestamp: 2023-07-27T15:08:21.034284
+CREATE TABLE "intervention"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "description" TEXT,
+    "date_debut" DATE,
+    "contrat_id" INTEGER REFERENCES "contrat" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
+);
+success!
